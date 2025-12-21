@@ -7,6 +7,7 @@ from datetime import datetime
 # 導入自定義模組
 import downloader_tw
 import downloader_us
+import downloader_hk  # 👈 新增：導入港股模組
 import analyzer
 import notifier
 
@@ -18,24 +19,25 @@ def run_market_pipeline(market_id, market_name, emoji):
     print(f"{emoji} 啟動管線：{market_name} ({market_id})")
     print("="*60)
 
-    # --- Step 1: 下載數據 ---
+    # --- Step 1: 數據獲取 ---
     print(f"【Step 1: 數據獲取】正在更新 {market_name} 原始 K 線資料...")
     try:
         if market_id == "tw-share":
             downloader_tw.main()
         elif market_id == "us-share":
             downloader_us.main()
+        elif market_id == "hk-share":
+            downloader_hk.main()  # 👈 新增：呼叫港股下載
         else:
             print(f"⚠️ 未知的市場 ID: {market_id}")
             return
     except Exception as e:
         print(f"❌ 數據下載失敗: {e}")
-        # 如果下載失敗，通常還是可以嘗試分析現有的舊資料，所以這裡不 return
 
     # --- Step 2: 數據分析 & 繪圖 ---
     print(f"\n【Step 2: 矩陣分析】正在計算 {market_name} 動能分布並生成圖表...")
     try:
-        # 取得分析結果：圖片資訊清單、原始 DataFrame、HTML 文字報表
+        # 取得分析結果
         img_paths, report_df, text_reports = analyzer.run_global_analysis(market_id=market_id)
         
         if report_df.empty:
@@ -62,8 +64,8 @@ def main():
     # 1. 解析命令列參數
     parser = argparse.ArgumentParser(description="Global Stock Monitor Orchestrator")
     parser.add_argument('--market', type=str, default='all', 
-                        choices=['tw-share', 'us-share', 'all'],
-                        help='指定執行市場：tw-share (台股), us-share (美股), 或 all (全部)')
+                        choices=['tw-share', 'us-share', 'hk-share', 'all'], # 👈 加入 hk-share
+                        help='指定執行市場：tw-share (台股), us-share (美股), hk-share (港股), 或 all (全部)')
     args = parser.parse_args()
 
     start_time = time.time()
@@ -78,6 +80,7 @@ def main():
     # 2. 市場配置清單
     markets_config = {
         "tw-share": {"name": "台灣股市", "emoji": "🇹🇼"},
+        "hk-share": {"name": "香港股市", "emoji": "🇭🇰"}, # 👈 新增港股配置
         "us-share": {"name": "美國股市", "emoji": "🇺🇸"}
     }
 
