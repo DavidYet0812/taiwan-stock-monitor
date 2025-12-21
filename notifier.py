@@ -140,5 +140,4 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
         })
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
-
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
