@@ -20,11 +20,11 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
     # 2. 判斷市場屬性（智慧識別六大市場）
     market_upper = market_name.upper()
     is_us = "美國" in market_upper or "US" in market_upper
-    is_hk = "香港" in market_upper or "HK" in market_upper
-    is_cn = "中國" in market_upper or "CN" in market_upper
+    #is_hk = "香港" in market_upper or "HK" in market_upper
+    #is_cn = "中國" in market_upper or "CN" in market_upper
     is_tw = "台灣" in market_upper or "TW" in market_upper
-    is_jp = "日本" in market_upper or "JP" in market_upper
-    is_kr = "韓國" in market_upper or "KR" in market_upper
+    #is_jp = "日本" in market_upper or "JP" in market_upper
+    #is_kr = "韓國" in market_upper or "KR" in market_upper
 
     # 3. 建立 Top 50 連結區塊邏輯
     def get_top50_links(df, col_name):
@@ -41,22 +41,22 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
             if is_us:
                 # 🇺🇸 美國：StockCharts
                 url = f"https://stockcharts.com/sc3/ui/?s={ticker}"
-            elif is_hk:
+            #elif is_hk:
                 # 🇭🇰 香港：AASTOCKS
-                clean_code = ticker.replace(".HK", "").strip().zfill(5)
-                url = f"https://www.aastocks.com/tc/stocks/quote/quick-quote.aspx?symbol={clean_code}"
-            elif is_cn:
+                #clean_code = ticker.replace(".HK", "").strip().zfill(5)
+                #url = f"https://www.aastocks.com/tc/stocks/quote/quick-quote.aspx?symbol={clean_code}"
+            #elif is_cn:
                 # 🇨🇳 中國 A 股：東方財富
-                prefix = "sh" if ticker.startswith('6') else "sz"
-                url = f"https://quote.eastmoney.com/{prefix}{ticker}.html"
-            elif is_jp:
+                #prefix = "sh" if ticker.startswith('6') else "sz"
+                #url = f"https://quote.eastmoney.com/{prefix}{ticker}.html"
+            #elif is_jp:
                 # 🇯🇵 日本：樂天證券 (需確保 .T 後綴)
-                clean_ticker = ticker if ".T" in ticker.upper() else f"{ticker.split('.')[0]}.T"
-                url = f"https://www.rakuten-sec.co.jp/web/market/search/quote.html?ric={clean_ticker}"
-            elif is_kr:
+                #clean_ticker = ticker if ".T" in ticker.upper() else f"{ticker.split('.')[0]}.T"
+                #url = f"https://www.rakuten-sec.co.jp/web/market/search/quote.html?ric={clean_ticker}"
+            #elif is_kr:
                 # 🇰🇷 韓國：Naver Finance (僅需代號數字)
-                clean_code = ticker.split('.')[0]
-                url = f"https://finance.naver.com/item/main.naver?code={clean_code}"
+                #clean_code = ticker.split('.')[0]
+                #url = f"https://finance.naver.com/item/main.naver?code={clean_code}"
             elif is_tw:
                 # 🇹🇼 台灣：玩股網
                 clean_tkr = ticker.split('.')[0]
@@ -141,3 +141,4 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
+
