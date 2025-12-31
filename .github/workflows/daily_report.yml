@@ -2,7 +2,7 @@ name: Global Market Monitor Parallel
 
 on:
   schedule:
-    - cron: '30 10 * * 1-5'
+    - cron: '30 08 * * 1-5'
   workflow_dispatch:
     inputs:
       market_choice:
@@ -14,10 +14,10 @@ on:
           - all
           - tw-share
           - us-share
-          - hk-share
-          - cn-share
-          - jp-share
-          - kr-share
+          #- hk-share
+          #- cn-share
+          #- jp-share
+          #- kr-share
 
 jobs:
   global-market-analysis:
@@ -29,10 +29,10 @@ jobs:
         market:
           - { id: "tw-share", name: "Taiwan", emoji: "🇹🇼" }
           - { id: "us-share", name: "US",     emoji: "🇺🇸" }
-          - { id: "hk-share", name: "HK",     emoji: "🇭🇰" }
-          - { id: "cn-share", name: "China",  emoji: "🇨🇳" }
-          - { id: "jp-share", name: "Japan",  emoji: "🇯🇵" }
-          - { id: "kr-share", name: "Korea",  emoji: "🇰🇷" }
+          #- { id: "hk-share", name: "HK",     emoji: "🇭🇰" }
+          #- { id: "cn-share", name: "China",  emoji: "🇨🇳" }
+          #- { id: "jp-share", name: "Japan",  emoji: "🇯🇵" }
+          #- { id: "kr-share", name: "Korea",  emoji: "🇰🇷" }
 
     steps:
       - uses: actions/checkout@v4
