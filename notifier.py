@@ -129,8 +129,8 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
             print(f"⚠️ 讀取圖片失敗 {img['path']}: {e}")
 
     # 6. 執行寄送
-    to_emails = ["s714139@gmail.com"]
-
+    to_emails = ["s714139@gmail.com", "zoe1208429@gmail.com", "popk0369@gmail.com"]
+    
     try:
         resend.Emails.send({
             "from": "StockMonitor <onboarding@resend.dev>",
@@ -142,6 +142,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
+
 
 
 
