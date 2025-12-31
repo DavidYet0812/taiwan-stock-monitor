@@ -20,9 +20,9 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
     # 2. 判斷市場屬性（智慧識別六大市場）
     market_upper = market_name.upper()
     is_us = "美國" in market_upper or "US" in market_upper
+    is_tw = "台灣" in market_upper or "TW" in market_upper
     #is_hk = "香港" in market_upper or "HK" in market_upper
     #is_cn = "中國" in market_upper or "CN" in market_upper
-    is_tw = "台灣" in market_upper or "TW" in market_upper
     #is_jp = "日本" in market_upper or "JP" in market_upper
     #is_kr = "韓國" in market_upper or "KR" in market_upper
 
@@ -41,6 +41,14 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
             if is_us:
                 # 🇺🇸 美國：StockCharts
                 url = f"https://stockcharts.com/sc3/ui/?s={ticker}"
+            elif is_tw:
+                # 🇹🇼 台灣：玩股網
+                clean_tkr = ticker.split('.')[0]
+                url = f"https://www.wantgoo.com/stock/{clean_tkr}/technical-chart"
+            else:
+                # 預設跳轉（台股模式）
+                clean_tkr = ticker.split('.')[0]
+                url = f"https://www.wantgoo.com/stock/{clean_tkr}/technical-chart"
             #elif is_hk:
                 # 🇭🇰 香港：AASTOCKS
                 #clean_code = ticker.replace(".HK", "").strip().zfill(5)
@@ -57,14 +65,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
                 # 🇰🇷 韓國：Naver Finance (僅需代號數字)
                 #clean_code = ticker.split('.')[0]
                 #url = f"https://finance.naver.com/item/main.naver?code={clean_code}"
-            elif is_tw:
-                # 🇹🇼 台灣：玩股網
-                clean_tkr = ticker.split('.')[0]
-                url = f"https://www.wantgoo.com/stock/{clean_tkr}/technical-chart"
-            else:
-                # 預設跳轉（台股模式）
-                clean_tkr = ticker.split('.')[0]
-                url = f"https://www.wantgoo.com/stock/{clean_tkr}/technical-chart"
+            
             
             display_name = r.get("Full_Name", ticker)
             links.append(f'<a href="{url}" style="text-decoration:none; color:#0366d6;">{ticker}({display_name})</a>')
@@ -73,7 +74,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
 
     # 4. 組合 HTML 郵件內容
     # 動態決定提示文字中的網站名稱
-    target_site = 'StockCharts' if is_us else 'AASTOCKS' if is_hk else '東方財富' if is_cn else '樂天證券' if is_jp else 'Naver Finance' if is_kr else '玩股網'
+    target_site = 'StockCharts' if is_us else 'AASTOCKS' if is_kr else '玩股網'
     
     html_content = f"""
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; max-width: 850px; margin: auto; border: 1px solid #eee; padding: 20px; border-radius: 10px;">
@@ -108,7 +109,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
             {get_top50_links(report_df, 'Week_High')}
         </div>
         <p style="margin-top: 50px; font-size: 12px; color: #bdc3c7; text-align: center;">
-            此報表由系統自動生成，僅供研究參考。
+            此報表由阿杰製作AI自動分析生成，僅供研究參考。
         </p>
     </div>
     """
@@ -141,4 +142,5 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
+
 
