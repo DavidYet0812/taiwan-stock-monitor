@@ -28,7 +28,12 @@ def get_market_url(market_id, ticker):
     if m_id == "us-share":
         # 🇺🇸 美股連結：StockCharts
         return f"https://stockcharts.com/sc3/ui/?s={ticker}"
-    
+
+    else:
+        # 🇹🇼 台股連結：玩股網
+        clean_ticker = ticker.split('.')[0]
+        return f"https://www.wantgoo.com/stock/{clean_ticker}/technical-chart"
+        
     #elif m_id == "hk-share":
         # 🇭🇰 港股連結：AASTOCKS (補足5位數)
         #clean_code = ticker.replace(".HK", "").strip().zfill(5)
@@ -50,11 +55,6 @@ def get_market_url(market_id, ticker):
         # 邏輯：Naver 僅接受純數字代碼，去除 .KS 或 .KQ
         #clean_code = ticker.split('.')[0]
         #return f"https://finance.naver.com/item/main.naver?code={clean_code}"
-
-    else:
-        # 🇹🇼 台股連結：玩股網
-        clean_ticker = ticker.split('.')[0]
-        return f"https://www.wantgoo.com/stock/{clean_ticker}/technical-chart"
 
 def build_company_list(arr_pct, codes, names, bins, market_id):
     """
@@ -198,3 +198,4 @@ def run_global_analysis(market_id="tw-share"):
     
 
     return images, df_res, text_reports
+
