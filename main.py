@@ -7,10 +7,10 @@ from datetime import datetime
 # 導入自定義模組
 import downloader_tw
 import downloader_us
-import downloader_hk
-import downloader_cn
-import downloader_jp  # 👈 新增：日本下載器
-import downloader_kr  # 👈 新增：韓國下載器
+#import downloader_hk
+#import downloader_cn
+#import downloader_jp  # 👈 新增：日本下載器
+#import downloader_kr  # 👈 新增：韓國下載器
 import analyzer
 import notifier
 
@@ -29,14 +29,14 @@ def run_market_pipeline(market_id, market_name, emoji):
             downloader_tw.main()
         elif market_id == "us-share":
             downloader_us.main()
-        elif market_id == "hk-share":
-            downloader_hk.main()
-        elif market_id == "cn-share":
-            downloader_cn.main()
-        elif market_id == "jp-share":
-            downloader_jp.main()  # 👈 新增：日本市場下載
-        elif market_id == "kr-share":
-            downloader_kr.main()  # 👈 新增：韓國市場下載
+        #elif market_id == "hk-share":
+            #downloader_hk.main()
+        #elif market_id == "cn-share":
+            #downloader_cn.main()
+        #elif market_id == "jp-share":
+            #downloader_jp.main()  # 👈 新增：日本市場下載
+        #elif market_id == "kr-share":
+            #downloader_kr.main()  # 👈 新增：韓國市場下載
         else:
             print(f"⚠️ 未知的市場 ID: {market_id}")
             return
@@ -74,7 +74,8 @@ def main():
     parser = argparse.ArgumentParser(description="Global Stock Monitor Orchestrator")
     parser.add_argument('--market', type=str, default='all', 
                         choices=['tw-share', 'us-share', 'hk-share', 'cn-share', 'jp-share', 'kr-share', 'all'], 
-                        help='指定執行市場：tw(台), us(美), hk(港), cn(中), jp(日), kr(韓), 或 all(全部)')
+                        help='指定執行市場：tw(台), us(美), 或 all(全部)')
+                        #help='指定執行市場：tw(台), us(美), hk(港), cn(中), jp(日), kr(韓), 或 all(全部)')
     args = parser.parse_args()
 
     start_time = time.time()
@@ -89,10 +90,10 @@ def main():
     # 2. 市場配置清單 (定義全球六大市場)
     markets_config = {
         "tw-share": {"name": "台灣股市", "emoji": "🇹🇼"},
-        "hk-share": {"name": "香港股市", "emoji": "🇭🇰"},
-        "cn-share": {"name": "中國股市", "emoji": "🇨🇳"},
-        "jp-share": {"name": "日本股市", "emoji": "🇯🇵"}, # 👈 新增
-        "kr-share": {"name": "韓國股市", "emoji": "🇰🇷"}, # 👈 新增
+        #"hk-share": {"name": "香港股市", "emoji": "🇭🇰"},
+        #"cn-share": {"name": "中國股市", "emoji": "🇨🇳"},
+        #"jp-share": {"name": "日本股市", "emoji": "🇯🇵"}, # 👈 新增
+        #"kr-share": {"name": "韓國股市", "emoji": "🇰🇷"}, # 👈 新增
         "us-share": {"name": "美國股市", "emoji": "🇺🇸"}
     }
 
@@ -113,4 +114,5 @@ def main():
     print("="*60)
 
 if __name__ == "__main__":
+
     main()
