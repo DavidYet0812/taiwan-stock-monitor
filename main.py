@@ -73,7 +73,8 @@ def main():
     # 1. 解析命令列參數
     parser = argparse.ArgumentParser(description="Global Stock Monitor Orchestrator")
     parser.add_argument('--market', type=str, default='all', 
-                        choices=['tw-share', 'us-share', 'hk-share', 'cn-share', 'jp-share', 'kr-share', 'all'], 
+                        choices=['tw-share', 'us-share', 'all'], 
+                        #choices=['tw-share', 'us-share', 'hk-share', 'cn-share', 'jp-share', 'kr-share', 'all'],
                         help='指定執行市場：tw(台), us(美), 或 all(全部)')
                         #help='指定執行市場：tw(台), us(美), hk(港), cn(中), jp(日), kr(韓), 或 all(全部)')
     args = parser.parse_args()
@@ -116,3 +117,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
