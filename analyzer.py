@@ -29,27 +29,27 @@ def get_market_url(market_id, ticker):
         # 🇺🇸 美股連結：StockCharts
         return f"https://stockcharts.com/sc3/ui/?s={ticker}"
     
-    elif m_id == "hk-share":
+    #elif m_id == "hk-share":
         # 🇭🇰 港股連結：AASTOCKS (補足5位數)
-        clean_code = ticker.replace(".HK", "").strip().zfill(5)
-        return f"https://www.aastocks.com/tc/stocks/quote/stocktrend.aspx?symbol={clean_code}"
+        #clean_code = ticker.replace(".HK", "").strip().zfill(5)
+        #return f"https://www.aastocks.com/tc/stocks/quote/stocktrend.aspx?symbol={clean_code}"
 
-    elif m_id == "cn-share":
+    #elif m_id == "cn-share":
         # 🇨🇳 中國 A 股連結：東方財富 (識別 sh/sz)
-        prefix = "sh" if ticker.startswith('6') else "sz"
-        return f"https://quote.eastmoney.com/{prefix}{ticker}.html"
+        #prefix = "sh" if ticker.startswith('6') else "sz"
+        #return f"https://quote.eastmoney.com/{prefix}{ticker}.html"
 
-    elif m_id == "jp-share":
+    #elif m_id == "jp-share":
         # 🇯🇵 日本連結：樂天證券 (Rakuten Securities)
         # 格式範例：7203.T
-        clean_ticker = ticker if ".T" in ticker.upper() else f"{ticker.split('.')[0]}.T"
-        return f"https://www.rakuten-sec.co.jp/web/market/search/quote.html?ric={clean_ticker}"
+        #clean_ticker = ticker if ".T" in ticker.upper() else f"{ticker.split('.')[0]}.T"
+        #return f"https://www.rakuten-sec.co.jp/web/market/search/quote.html?ric={clean_ticker}"
 
-    elif m_id == "kr-share":
+    #elif m_id == "kr-share":
         # 🇰🇷 韓國連結：Naver Finance
         # 邏輯：Naver 僅接受純數字代碼，去除 .KS 或 .KQ
-        clean_code = ticker.split('.')[0]
-        return f"https://finance.naver.com/item/main.naver?code={clean_code}"
+        #clean_code = ticker.split('.')[0]
+        #return f"https://finance.naver.com/item/main.naver?code={clean_code}"
 
     else:
         # 🇹🇼 台股連結：玩股網
@@ -196,4 +196,5 @@ def run_global_analysis(market_id="tw-share"):
         if col in df_res.columns:
             text_reports[p_n] = build_company_list(df_res[col].values, df_res['Ticker'].tolist(), df_res['Full_Name'].tolist(), BINS, market_id)
     
+
     return images, df_res, text_reports
