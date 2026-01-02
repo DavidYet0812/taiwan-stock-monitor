@@ -2,7 +2,7 @@ name: Global Market Monitor Parallel
 
 on:
   schedule:
-    - cron: '30 08 * * 1-5'
+    - cron: '00 07 * * 1-5'
   workflow_dispatch:
     inputs:
       market_choice:
