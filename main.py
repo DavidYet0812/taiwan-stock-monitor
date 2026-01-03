@@ -6,7 +6,7 @@ from datetime import datetime
 
 # 導入自定義模組
 import downloader_tw
-import downloader_us
+#import#import downlo
 #import downloader_hk
 #import downloader_cn
 #import downloader_jp  # 👈 新增：日本下載器
@@ -27,8 +27,8 @@ def run_market_pipeline(market_id, market_name, emoji):
     try:
         if market_id == "tw-share":
             downloader_tw.main()
-        elif market_id == "us-share":
-            downloader_us.main()
+        #elif market_id == "us-share":
+            #downloader_us.main()
         #elif market_id == "hk-share":
             #downloader_hk.main()
         #elif market_id == "cn-share":
@@ -73,9 +73,9 @@ def main():
     # 1. 解析命令列參數
     parser = argparse.ArgumentParser(description="Global Stock Monitor Orchestrator")
     parser.add_argument('--market', type=str, default='all', 
-                        choices=['tw-share', 'us-share', 'all'], 
+                        choices=['tw-share', 'all'], 
                         #choices=['tw-share', 'us-share', 'hk-share', 'cn-share', 'jp-share', 'kr-share', 'all'],
-                        help='指定執行市場：tw(台), us(美), 或 all(全部)')
+                        help='指定執行市場：tw(台), all(全部)')
                         #help='指定執行市場：tw(台), us(美), hk(港), cn(中), jp(日), kr(韓), 或 all(全部)')
     args = parser.parse_args()
 
@@ -95,7 +95,7 @@ def main():
         #"cn-share": {"name": "中國股市", "emoji": "🇨🇳"},
         #"jp-share": {"name": "日本股市", "emoji": "🇯🇵"}, # 👈 新增
         #"kr-share": {"name": "韓國股市", "emoji": "🇰🇷"}, # 👈 新增
-        "us-share": {"name": "美國股市", "emoji": "🇺🇸"}
+        #"us-share": {"name": "美國股市", "emoji": "🇺🇸"}
     }
 
     # 3. 執行邏輯
@@ -117,4 +117,5 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
