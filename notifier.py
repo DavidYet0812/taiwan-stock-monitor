@@ -38,11 +38,10 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
             ticker = str(r["Ticker"])
             
             # --- 智慧連結判定 ---
-            #if is_us:
+            if is_us:
                 # 🇺🇸 美國：StockCharts
                 #url = f"https://stockcharts.com/sc3/ui/?s={ticker}"
-            #elif is_tw:
-             if is_tw:
+            elif is_tw:
                 # 🇹🇼 台灣：玩股網
                 clean_tkr = ticker.split('.')[0]
                 url = f"https://www.wantgoo.com/stock/{clean_tkr}/technical-chart"
@@ -143,6 +142,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
+
 
 
 
