@@ -13,7 +13,7 @@ on:
         options:
           - all
           - tw-share
-          - us-share
+          #- us-share
           #- hk-share
           #- cn-share
           #- jp-share
@@ -28,7 +28,7 @@ jobs:
       matrix:
         market:
           - { id: "tw-share", name: "Taiwan", emoji: "🇹🇼" }
-          - { id: "us-share", name: "US", emoji: "🇺🇸" }
+          #- { id: "us-share", name: "US", emoji: "🇺🇸" }
           #- { id: "hk-share", name: "HK", emoji: "🇭🇰" }
           #- { id: "cn-share", name: "China",  emoji: "🇨🇳" }
           #- { id: "jp-share", name: "Japan",  emoji: "🇯🇵" }
