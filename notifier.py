@@ -19,7 +19,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
     
     # 2. 判斷市場屬性（智慧識別六大市場）
     market_upper = market_name.upper()
-    #is_us = "美國" in market_upper or "US" in market_upper
+    is_us = "美國" in market_upper or "US" in market_upper
     is_tw = "台灣" in market_upper or "TW" in market_upper
     #is_hk = "香港" in market_upper or "HK" in market_upper
     #is_cn = "中國" in market_upper or "CN" in market_upper
@@ -142,6 +142,7 @@ def send_stock_report(market_name, img_data, report_df, text_reports):
         print(f"✅ 郵件發送成功！市場：{market_name}")
     except Exception as e:
         print(f"❌ 郵件發送失敗 ({market_name}): {e}")
+
 
 
 
